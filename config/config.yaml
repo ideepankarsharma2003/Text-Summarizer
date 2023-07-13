@@ -1,0 +1,9 @@
+artifacts_root: artifacts
+
+data_ingestion:
+  root_dir: artifacts/data_ingestion
+  # source_URL: https://github.com/ideepankarsharma2003/Text-Summarizer/blob/main/data/summarizer-data.zip # edhar url ayega
+  source_URL: https://github.com/ideepankarsharma2003/Text-Summarizer/raw/main/data/summarizer-data.zip # edhar url ayega
+  # source_URL: https://github.com/entbappy/Branching-tutorial/raw/master/summarizer-data.zip # edhar url ayega
+  local_data_file: artifacts/data_ingestion/data.zip
+  unzip_dir: artifacts/data_ingestion
