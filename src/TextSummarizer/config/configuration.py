@@ -2,8 +2,12 @@
 
 from TextSummarizer.constants import *
 from TextSummarizer.utils.common import read_yaml, create_directories
-from TextSummarizer.entity import DataIngestionConfig, DataValidationConfig
-
+from TextSummarizer.entity import (
+                                    DataIngestionConfig, 
+                                    DataValidationConfig, 
+                                    DataTransformationConfig, 
+                                    ModelTrainerConfig
+                                )
 
 class ConfigurationManager:
     def __init__(
@@ -34,6 +38,8 @@ class ConfigurationManager:
     
 
 
+
+
     def get_data_validation_config(self) -> DataValidationConfig:
         config= self.config.data_validation
         create_directories([config.root_dir])
@@ -45,3 +51,62 @@ class ConfigurationManager:
         )
 
         return data_validation_config
+    
+
+
+
+
+    
+    def get_data_transformation_config(self)->DataTransformationConfig:
+        config= self.config.data_transformation
+
+        create_directories([config.root_dir])
+
+        data_transformation_config= DataTransformationConfig(
+            root_dir= config.root_dir,
+            data_path= config.data_path,
+            tokenizer_name= config.tokenizer_name
+        )
+
+        return data_transformation_config
+    
+
+
+
+
+
+
+
+    
+    def get_model_trainer_config(self)-> ModelTrainerConfig:
+        config= self.config.model_trainer
+        params= self.params.TrainingArguments
+
+        create_directories([config.root_dir])
+
+        model_trainer_config= ModelTrainerConfig(
+            root_dir= config.root_dir,
+            data_path= config.data_path,
+            model_ckpt= config.model_ckpt,
+            # num_train_epochs= config.num_train_epochs,
+            num_train_epochs= params.num_train_epochs,
+            # warmup_steps= config.warmup_steps,
+            warmup_steps= params.warmup_steps,
+            # per_device_train_batch_size= config.per_device_train_batch_size,
+            per_device_train_batch_size= params.per_device_train_batch_size,
+            # weight_decay= config.weight_decay,
+            weight_decay= params.weight_decay,
+            # logging_steps= config.logging_steps,
+            logging_steps= params.logging_steps,
+            # evaluation_strategy= config.evaluation_strategy,
+            evaluation_strategy= params.evaluation_strategy,
+            # eval_steps= config.eval_steps,
+            eval_steps= params.eval_steps,
+            # save_steps= config.save_steps,
+            save_steps= params.save_steps,
+            # gradient_accumulation_steps= config.gradient_accumulation_steps,
+            gradient_accumulation_steps= params.gradient_accumulation_steps,
+
+        )
+
+        return model_trainer_config

@@ -1,1 +1,19 @@
-key: value
+TrainingArguments:
+  num_train_epochs: 1
+  warmup_steps: 500
+  # warmup_steps: 20
+  # per_device_train_batch_size: 1
+  per_device_train_batch_size: 1
+  # per_device_eval_batch_size: 32
+  weight_decay: 0.01
+  # learning_rate: 5e-5
+  # logging_dir: ./logs
+  # save_total_limit: 100000000000
+  
+  save_steps: 1000000
+  # save_steps: 50000
+  evaluation_strategy: 'steps'
+  eval_steps: 500
+  logging_steps: 10
+  gradient_accumulation_steps: 16
+  # load_best_model_at_end: true
